@@ -43,7 +43,10 @@ implementation execUser for User:
     """
         Exec based implementation until a handler is available
     """
-    exec::Run(host=host, command=std::template("user/useradd.j2"), unless="grep -E '^{{name}}' /etc/passwd")
+    run = exec::Run(host=host, command=std::template("user/useradd.j2"), unless="grep -E '^{{name}}' /etc/passwd")
+    for req in self.requires:
+        run.requires = req.requires
+    end
 end
 
 implement User using execUser
@@ -52,7 +55,8 @@ implementation execGroup for Group:
     """
         Exec based implementation until a handler is available
     """
-    exec::Run(host=host, command=std::template("user/groupadd.j2"), unless="grep -E '^{{name}}' /etc/group")
+    run = exec::Run(host=host, command=std::template("user/groupadd.j2"), unless="grep -E '^{{name}}' /etc/group")
+    self.requires = run
 end
 
 implement Group using execGroup
