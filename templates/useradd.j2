@@ -1,1 +1,1 @@
-useradd {{ "-r " if system else "" }}-g {{ group }}{% if groups | length > 0 %}-g {{groups | join(",")}}{% endif %} -s {{ shell }} -d {{ homedir }} {{ name }}
+/usr/sbin/useradd {{ "-r " if system else "" }}-g {{ group }}{% if groups | length > 0 %}-g {{groups | join(",")}}{% endif %} -s {{ shell }} -d {{ homedir }} {{ name }}

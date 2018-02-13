@@ -1,1 +1,1 @@
-groupadd {{ "-r " if system else "" }} {{ name }}
+/usr/sbin/groupadd {{ "-r " if system else "" }} {{ name }}
